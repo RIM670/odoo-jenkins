@@ -1,0 +1,9 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_agency_car,access agency car,model_agency_car,base.group_system,1,1,1,1
+access_car_brand,access car brand,model_car_brand,base.group_system,1,1,1,1
+access_customer,access customer ,model_res_partner,base.group_system,1,1,1,1
+access_reservation,access reservation car,model_car_reservation,base.group_system,1,1,1,1
+access_wizard,access wizard,model_damaged_why,base.group_system,1,1,1,1
+
+
+

@@ -1,0 +1,75 @@
+<odoo>
+    <record id="action_car" model="ir.actions.act_window">
+            <field name="name">Car</field>
+            <field name="res_model">agency.car</field>
+    </record>
+
+     <record id="car_view_tree" model="ir.ui.view">
+            <field name="name">Car</field>
+            <field name="model">agency.car</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="registration_number"/>
+                    <field name="car_model"/>
+                    <field name="car_brand_id"/>
+                    <field name="mileage"/>
+                    <field name="start_date" invisible="status != 'rented'"/>
+                    <field name="end_date" invisible="status != 'rented'"/>
+                    <field name="status"/>
+                    <field name="note" invisible="status != 'damaged'"/>
+                    <field name="agency_id" widget="many2many_tags"/>
+
+                </tree>
+            </field>
+    </record>
+
+
+    <record id="car_view_form" model="ir.ui.view">
+            <field name="name">Car Form</field>
+            <field name="model">agency.car</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <header>
+                            <field name="status" widget="statusbar"/>
+                            <button string="Damaged" type="object" name="alt_action" data-hotkey="z"  />
+                            <button string="Available" type="object" name="action_available" data-hotkey="z"  />
+                        </header>
+                        <group>
+                            <group string="main information">
+                                <field name="registration_number"/>
+                                <field name="car_model" required="1"/>
+                                <field name="mileage"/>
+                                <field name="car_brand_id"/>
+                                <field name="agency_id" required="1" widget="many2many_tags" domain="[('is_company', '=', True)]"/>
+                                <field name="note" invisible="status != 'damaged'" />
+
+                            </group>
+                            <group string="availability information">
+                                <field name="status" readonly="1"/>
+                                <field name="start_date" invisible="status != 'rented'" readonly="1" />
+                                <field name="end_date" invisible="status != 'rented'" readonly="1" />
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+
+
+
+     <record id="car_view_search" model="ir.ui.view">
+            <field name="name">Car Search</field>
+            <field name="model">agency.car</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="registration_number" />
+                    <filter name="is_available" string="Available" domain="[('status','=','available')]"/>
+                    <filter name="is_rented" string="Rented" domain="[('status','=','rented')]"/>
+                    <filter name="is_damaged" string="Damaged" domain="[('status','=','damaged')]"/>
+
+                </search>
+            </field>
+    </record>
+</odoo>

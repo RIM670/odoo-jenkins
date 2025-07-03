@@ -1,0 +1,50 @@
+<odoo>
+    <record id="action_car_brand" model="ir.actions.act_window">
+            <field name="name">Car Brand</field>
+            <field name="res_model">car.brand</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                add a new brand
+
+                </p>
+            </field>
+    </record>
+
+     <record id="car_brand_view_tree" model="ir.ui.view">
+            <field name="name">Car Brand</field>
+            <field name="model">car.brand</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="image"  widget="image" class="oe_avatar" nolabel="1" options="{'size': [0, 50]}"/>
+                    <field name="description"/>
+                    <field name="number_cars"/>
+                </tree>
+            </field>
+    </record>
+
+     <record id="car_brand_view_form" model="ir.ui.view">
+            <field name="name">Car Brand Form</field>
+            <field name="model">car.brand</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group string="main information">
+                                <field name="name" required="1"/>
+                                <field name="description"/>
+                            </group>
+                             <group string="additional information">
+                                 <field name="image"/>
+                            </group>
+                            <field name="cars_ids"/>
+
+
+                        </group>
+                    </sheet>
+
+                </form>
+            </field>
+    </record>
+
+</odoo>

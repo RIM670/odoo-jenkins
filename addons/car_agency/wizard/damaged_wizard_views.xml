@@ -1,0 +1,27 @@
+<odoo>
+    <record id="view_damaged_wizard_form" model="ir.ui.view">
+            <field name="name">damaged wizard form</field>
+            <field name="model">damaged.why</field>
+            <field name="arch" type="xml">
+                <form>
+                        <group>
+                            <field name="damaged_car_id"/>
+                            <field name="damage_description"/>
+                        </group>
+                        <footer>
+                            <button string="Confirm" type="object" name="action_confirm" class="btn-primary"/>
+                            <button string="Cancel" special="cancel" class="btn btn-secondary"/>
+                        </footer>
+                </form>
+            </field>
+    </record>
+
+     <record id="action_damaged_car" model="ir.actions.act_window">
+            <field name="name">Damaged Reason</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">damaged.why</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+    </record>
+
+</odoo>
