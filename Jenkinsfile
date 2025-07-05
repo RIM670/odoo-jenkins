@@ -14,6 +14,14 @@ pipeline {
                 sh 'docker compose up -d'
             }
         }
+        stage('Initialize Odoo DB') {
+    steps {
+        sh '''
+            echo "Initializing Odoo DB..."
+            docker compose exec -T odoo odoo -i base --database=odoo --without-demo=all --stop-after-init || true
+        '''
+    }
+}
 
         stage('Health Check') {
             steps {
