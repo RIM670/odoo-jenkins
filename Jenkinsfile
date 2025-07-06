@@ -15,7 +15,7 @@ pipeline {
             }
         }
        
-}
+
         
 
         stage('Initialize Odoo DB') {
