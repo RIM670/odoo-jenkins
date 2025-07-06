@@ -14,10 +14,7 @@ pipeline {
                 sh 'docker compose up -d'
             }
         }
-        stage('Code Linting') {
-    steps {
-        sh 'flake8 . || true' 
-    }
+       
 }
         
 
