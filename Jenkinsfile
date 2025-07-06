@@ -30,7 +30,7 @@ pipeline {
     steps {
         sh '''
             echo "Running tests..."
-            docker compose exec -T odoo odoo --test-enable -i my_module --stop-after-init --database=odoo_test || true
+            docker compose exec -T odoo odoo --test-enable -i car_agency --stop-after-init --database=odoo_test || true
         '''
     }
 }
