@@ -14,6 +14,13 @@ pipeline {
                 sh 'docker compose up -d'
             }
         }
+        stage('Code Linting') {
+    steps {
+        sh 'flake8 . || true' 
+    }
+}
+        
+
         stage('Initialize Odoo DB') {
     steps {
         sh '''
@@ -22,6 +29,21 @@ pipeline {
         '''
     }
 }
+        stage('Run Unit Tests') {
+    steps {
+        sh '''
+            echo "Running tests..."
+            docker compose exec -T odoo odoo --test-enable -i my_module --stop-after-init --database=odoo_test || true
+        '''
+    }
+}
+        stage('Owasp Scan') {
+            steps {
+                dependencyCheck additionalArguments: ' --scan ./ ', odcInstallation: 'DC'
+                dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
+            }
+        }
+
 
         stage('Health Check') {
             steps {
