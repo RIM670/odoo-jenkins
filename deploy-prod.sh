@@ -4,7 +4,7 @@ set -e
 echo "🚀 Déploiement des modules sur Odoo Prod..."
 
 # Variables à adapter
-USER_PROD=odoo
+USER_PROD=rim
 HOST_PROD=192.168.17.130  # IP de ta VM Odoo installée manuellement
 DEST_PATH=/opt/odoo/custom_addons/
 
