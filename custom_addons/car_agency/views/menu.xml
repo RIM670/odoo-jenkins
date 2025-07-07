@@ -1,0 +1,42 @@
+<odoo>
+
+     <menuitem id="menu_agency_root"
+              name="Car Agency"
+              web_icon="car_agency,static/description/icon.png"
+     />
+
+
+     <menuitem id="menu_customer"
+              name="Customer"
+              parent="menu_agency_root"
+               action="action_customer"
+
+     />
+
+
+    <menuitem id="menu_brand"
+              name="Car Brand"
+              parent="menu_agency_root"
+              action="action_car_brand"
+    />
+
+
+     <menuitem id="menu_car"
+              name="Car"
+              parent="menu_agency_root"
+              action="action_car"
+     />
+
+     <menuitem id="menu_agency"
+              name="Agency"
+              parent="menu_agency_root"
+              action="action_agency"
+     />
+
+    <menuitem id="menu_reservation"
+              name="Reservation"
+              parent="menu_agency_root"
+              action="action_reservation"
+     />
+
+</odoo>
