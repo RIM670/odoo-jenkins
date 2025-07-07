@@ -20,3 +20,6 @@ echo "♻️ Redémarrage du service Odoo sur la VM prod..."
 ssh $USER_PROD@$HOST_PROD "sudo systemctl restart odoo17"
 
 echo "✅ Déploiement terminé avec succès."
+ssh $USER_PROD@$HOST_PROD "echo '?? Service odoo17 status :' && systemctl status odoo17 | head -n 10"
+ssh $USER_PROD@$HOST_PROD "ps -eo pid,lstart,cmd | grep odoo | grep -v grep"
+
