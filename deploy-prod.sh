@@ -17,6 +17,6 @@ DEST_PATH=/opt/odoo/custom_addons/
 
 # Redémarrer le service Odoo
 echo "♻️ Redémarrage du service Odoo sur la VM prod..."
-ssh $USER_PROD@$HOST_PROD "sudo systemctl restart odoo"
+ssh $USER_PROD@$HOST_PROD "sudo systemctl restart odoo17"
 
 echo "✅ Déploiement terminé avec succès."
