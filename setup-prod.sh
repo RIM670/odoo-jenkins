@@ -1,16 +1,23 @@
 #!/bin/bash
 
-JOB_NAME="odoo-prod-deploy"
+set -e
+
 JENKINS_URL="http://localhost:8080"
-JENKINS_USER="admin"
-JENKINS_API_TOKEN="ton_token_jenkins"
-CONFIG_XML_PATH="./job-config/config.xml"
+JENKINS_USER="rim"
+JENKINS_PASSWORD="0000" 
 
-echo "[INFO] Création du job Jenkins : $JOB_NAME"
 
-curl -X POST "${JENKINS_URL}/createItem?name=${JOB_NAME}" \
-  --user "${JENKINS_USER}:${JENKINS_API_TOKEN}" \
-  --header "Content-Type: application/xml" \
-  --data-binary @"${CONFIG_XML_PATH}"
 
-echo "[✅] Job créé. Vérifie dans Jenkins à ${JENKINS_URL}/job/${JOB_NAME}/"
+# Étape 1 - Télécharger jenkins-cli.jar depuis Jenkins en local
+echo " Téléchargement de jenkins-cli.jar depuis $JENKINS_URL"
+wget -q $JENKINS_URL/jnlpJars/jenkins-cli.jar
+
+# Étape 2 - Créer le job dans Jenkins
+echo " Création du job 'odoo-pipeline' dans Jenkins..."
+
+java -jar jenkins-cli.jar -s $JENKINS_URL \
+  -auth $JENKINS_USER:$JENKINS_PASSWORD \
+  update-job odoo-pipeline-prod < ./job-config/config.xml
+
+echo " Pipeline Jenkins créée avec succès !"
+
