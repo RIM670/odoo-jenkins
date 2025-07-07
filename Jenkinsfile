@@ -18,8 +18,8 @@ stage('SonarQube Analysis') {
                     echo "🔎 Lancement de l’analyse SonarQube..."
 
                     # Ajoute le dossier sonar-scanner à ton PATH si nécessaire :
-                    export PATH=$PATH:/opt/sonar-scanner/bin
-
+                     export SONAR_TOKEN=${SONAR_TOKEN}
+                    ${SCANNER_HOME}/bin/
                     sonar-scanner \
                       -Dsonar.projectKey=odoo-prod \
                       -Dsonar.projectName=odoo-prod \
