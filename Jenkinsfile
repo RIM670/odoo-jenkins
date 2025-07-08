@@ -45,7 +45,7 @@ stage('Security Scan with Bandit') {
 
       deactivate
     '''
-    // Optional: archive the report
+    // Optional/archive the report
     archiveArtifacts artifacts: 'bandit-report.html', allowEmptyArchive: true
   }
 }
