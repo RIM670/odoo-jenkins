@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+        SCANNER_HOME = tool 'Sonar-scanner'
+    }
+
 
     stages {
         stage('Clone staging') {
