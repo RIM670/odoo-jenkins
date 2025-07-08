@@ -34,8 +34,7 @@ stage('Security Scan with Bandit') {
     sh '''
       echo 🔒 Creating virtual environment for Bandit...
       python3 -m venv bandit-env
-      source bandit-env/bin/activate
-
+      . bandit-env/bin/activate
       echo 📦 Installing Bandit...
       pip install --upgrade pip
       pip install bandit
