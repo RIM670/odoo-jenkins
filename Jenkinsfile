@@ -34,6 +34,25 @@ pipeline {
         '''
     }
 }
+        stage('SonarQube Analysis') {
+  steps {
+    withSonarQubeEnv('sonar') {
+      withCredentials([string(credentialsId: 'SONAR_TOKEN', variable: 'SONAR_TOKEN')]) {
+        sh """
+          echo Lancement de l’analyse SonarQube...
+          export PATH=\$SCANNER_HOME/bin:\$PATH
+          sonar-scanner \
+            -Dsonar.projectKey=odoo-staging \
+            -Dsonar.projectName=odoo-staging \
+            -Dsonar.sources=addons \
+            -Dsonar.exclusions=**/*.js,**/*.html \
+            -Dsonar.host.url=http://192.168.17.128:9000 \
+            -Dsonar.login=${SONAR_TOKEN}
+        """
+      }
+    }
+  }
+}
         stage('Owasp Scan') {
             steps {
                 dependencyCheck additionalArguments: ' --scan ./ ', odcInstallation: 'DC'
