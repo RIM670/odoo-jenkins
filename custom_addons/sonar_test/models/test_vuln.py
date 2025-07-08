@@ -3,22 +3,22 @@ import os
 
 class SonarTest(models.Model):
     _name = 'sonar.test'
-    _description = 'Test de sécurité SonarQube'
+    _description = 'Test de sÃ©curitÃ© SonarQube'
 
     name = fields.Char("Nom")
 
     @api.model
     def read_sensitive_file(self):
-        # ?? Vulnérabilité : accès à un fichier système
+        # ?? VulnÃ©rabilitÃ© : accÃ¨s Ã  un fichier systÃ¨m
         with open('/etc/passwd', 'r') as f:
             return f.read()
 
     @api.model
     def insecure_eval(self, code):
-        # ?? Vulnérabilité : exécution dynamique non sécurisée
+        # ?? VulnÃ©rabilitÃ© : exÃ©cution dynamique non sÃ©curisÃ©e
         return eval(code)
 
     @api.model
     def command_injection(self, user_input):
-        # ?? Vulnérabilité : injection de commande shell
+        # ?? VulnÃ©rabilitÃ© : injection de commande shell
         return os.system(f"ping -c 1 {user_input}")
