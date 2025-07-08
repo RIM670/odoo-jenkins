@@ -29,6 +29,26 @@ stage('SonarQube Analysis') {
     }
   }
 }
+stage('Security Scan with Bandit') {
+  steps {
+    sh '''
+      echo 🔒 Creating virtual environment for Bandit...
+      python3 -m venv bandit-env
+      source bandit-env/bin/activate
+
+      echo 📦 Installing Bandit...
+      pip install --upgrade pip
+      pip install bandit
+
+      echo 🚨 Running Bandit on custom_addons/...
+      bandit -r custom_addons/ -f html -o bandit-report.html || true
+
+      deactivate
+    '''
+    // Optional: archive the report
+    archiveArtifacts artifacts: 'bandit-report.html', allowEmptyArchive: true
+  }
+}
 
 
 
