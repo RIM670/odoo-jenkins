@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-echo "🚀 Déploiement des modules sur Odoo Prod..."
+echo " Déploiement des modules sur Odoo Prod..."
 
 
 USER_PROD=rim
