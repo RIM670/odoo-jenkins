@@ -71,5 +71,22 @@ pipeline {
                 sh 'curl -f http://localhost:8069 || exit 1'
             }
         }
+        stage('Trivy Security Scan') {
+  steps {
+    sh '''
+      echo Running Trivy Scan...
+      mkdir -p trivy-report
+      curl -L https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -o html.tpl
+      docker run --rm -v $(pwd):/project -w /project aquasec/trivy fs . \
+        --format template --template "@html.tpl" -o trivy-report/trivy-report.html
+    '''
+  }
+}
     }
+     post {
+always {
+// Archive the Trivy report so it's downloadable from Jenkins UI
+archiveArtifacts artifacts: 'trivy-report/*.html', fingerprint: true
+}
+}
 }
