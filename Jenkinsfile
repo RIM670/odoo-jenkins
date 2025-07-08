@@ -56,13 +56,16 @@ stage('Security Scan with Trivy') {
       # Create directory for report
       mkdir -p trivy-report
 
-      # Run Trivy in Docker (requires Docker to be installed on Jenkins agent)
-      docker run --rm -v $(pwd):/project -w /project aquasec/trivy fs . \
-        --exit-code 0 \
-        --format template \
-        --template "@contrib/html.tpl" \
-        -o trivy-report/trivy-report.html
-    '''
+   
+  # Download Trivy HTML template
+  curl -L https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/html.tpl -o html.tpl
+
+  # Run Trivy and generate report
+  docker run --rm -v $(pwd):/project -w /project aquasec/trivy fs . \
+    --format template \
+    --template "@html.tpl" \
+    -o trivy-report/trivy-report.html
+'''
   }
 }
 
