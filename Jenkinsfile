@@ -48,9 +48,33 @@ stage('Security Scan with Bandit') {
     archiveArtifacts artifacts: 'bandit-report.html', allowEmptyArchive: true
   }
 }
+stage('Security Scan with Trivy') {
+  steps {
+    sh '''
+      echo "🛡️  Running Trivy file system scan..."
+
+      # Create directory for report
+      mkdir -p trivy-report
+
+      # Run Trivy in Docker (requires Docker to be installed on Jenkins agent)
+      docker run --rm -v $(pwd):/project -w /project aquasec/trivy fs . \
+        --exit-code 0 \
+        --format template \
+        --template "@contrib/html.tpl" \
+        -o trivy-report/trivy-report.html
+    '''
+  }
+}
 
 
 
 
     }
+    post {
+always {
+// Archive the Trivy report so it's downloadable from Jenkins UI
+archiveArtifacts artifacts: 'trivy-report/*.html', fingerprint: true
 }
+}
+}
+
