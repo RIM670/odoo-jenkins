@@ -50,7 +50,7 @@ pipeline {
             -Dsonar.projectName=odoo-staging \
             -Dsonar.sources=addons \
             -Dsonar.exclusions=**/*.js,**/*.html \
-            -Dsonar.host.url=http://192.168.17.128:9000 \
+            -Dsonar.host.url=http://192.168.1.168:9000 \
             -Dsonar.login=${SONAR_TOKEN}
         """
       }
