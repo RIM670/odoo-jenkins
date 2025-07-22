@@ -5,7 +5,7 @@ echo " Déploiement des modules sur Odoo Prod..."
 
 
 USER_PROD=rim
-HOST_PROD=192.168.17.130  
+HOST_PROD=192.168.1.8 
 DEST_PATH=/opt/odoo/custom_addons/
 
 
